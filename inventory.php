@@ -95,6 +95,7 @@ function compare_lists($needles, $haystack)
 	//echo "$hits hits";
 	//echo "leaving compare_lists";
 	echo '-->';
+	sort($results);
 	return $results;
 }
 
