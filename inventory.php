@@ -159,14 +159,4 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 	}
 	return $bulleted_list;
 }
-
-function chop_content_local($art_text)
-{
-	//echo "chopping text";
-	$content_begins = strpos($art_text, '<!-- start content -->');
-	$content_ends = strpos($art_text, '<!-- end content -->');
-	$content = substr($art_text, $content_begins, strlen($art_text)-$content_ends);
-	return str_replace('[bearbeiten]', '', $content);
-}
-
 ?>
