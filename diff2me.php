@@ -151,8 +151,20 @@ for($block_i = 1;$block_i<count($revision_html_blocks);$block_i++)
 		$old_id= substr($one_version, $pos_of_oldid , $length_of_oldid );
 		
 		$redirect = "http://".$server."/w/index.php?title=".$articleenc."&type=revision&diff=new&oldid=".$old_id;
-		echo '<html><head><meta http-equiv="cache-control" CONTENT="no-cache">';
-		echo '<meta http-equiv="refresh" content="blabla; url='.$redirect.'"></head><body>redirecting to <a href="'.$redirect.'">diff</a> ...</body></html>';
+        
+        echo '<html><head><meta http-equiv="cache-control" CONTENT="no-cache">';
+        
+        if(!$is_redir)
+		{
+            echo '<meta http-equiv="refresh" content="blabla; url='.$redirect.'">';
+        }
+        echo     '</head>'.'<body>redirecting to <a href="'.$redirect.'">diff</a> ...';
+        
+        if($is_redir)
+        {
+            echo 'using redirect [['.$_REQUEST['article'].']]=>[['.$article.']]';
+        }
+        echo '</body></html>';
 		break;
 	}	
 	
