@@ -153,7 +153,7 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 				$lemma = ':'.$lemma;
 			}
 			
-			$bulleted_list.="* [[".$lemma."]]: [[:Kategorie:$cat|$cat]]\n";
+			$bulleted_list.="* [[".$lemma."]]\n";
 			$number_of_current_entries = $number_of_current_entries + 1;
 		}
 	}
