@@ -36,27 +36,40 @@ $entries_removed = compare_lists($plain_text, $plainfuture_text);
 $entries_added= compare_lists($plainfuture_text, $plain_text);
 
 echo '<form method="post" id="diff_form" action="https://'.$server.'/w/index.php?action=submit&title='. urlencode('Wikipedia:Spielwiese') .'" target="_blank">'."\n";
+
 echo "<textarea  name=\"wpTextbox1\">";
 echo ":via [[".$article."]]\n";
 echo "\n===weg===\n";
-
-foreach($entries_removed AS $removed)
-{
-	echo "$removed\n";
-}
-echo "\n Änderungen: ". count($entries_removed);
-
+print_diff_list($entries_removed);
 echo "\n===dazu===\n";
-
-foreach($entries_added AS $added)
-{
-	echo "$added\n";
-}
-echo "\n Änderungen: ". count($entries_added);
+print_diff_list($entries_added);
 echo "</textarea><br>";
+
 echo '<input type="hidden" value="new" name="wpSection" />';
 set_up_media_wiki_input_fields("Änderungen", "Änderungen anschauen", urlencode('Wikipedia:Spielwiese'));
 echo "</form>\n";
+
+function print_diff_list($entries_removed)
+{
+    global $cat;
+    $since = $_REQUEST['since'];
+    $use_diff = ($since != "");
+
+    $url_prefix = 'http://'.$_SERVER["SERVER_NAME"].'/'.'diff2me.php?mode=date&date_after=' .$since.'&&project=wikipedia&lang=de&article=';
+
+    foreach($entries_removed AS $removed)
+    {
+        $article_with_link = str_replace(": [[:Kategorie:$cat|$cat]]", "", $removed);
+        $article = extract_link_target($article_with_link);
+        echo $article_with_link;
+        if($use_diff) 
+        {
+            echo " ([$url_prefix". name_in_url($article) . " diff])";
+        }
+        echo "\n";
+    }
+    echo "\n Änderungen: ". count($entries_removed);
+}
 
 function get_plain_text_from_article($articleenc)
 {
