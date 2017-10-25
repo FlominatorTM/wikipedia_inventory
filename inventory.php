@@ -55,7 +55,7 @@ function print_diff_list($entries_removed)
     $since = $_REQUEST['since'];
     $use_diff = ($since != "");
 
-    $url_prefix = 'http://'.$_SERVER["SERVER_NAME"].'/'.'diff2me.php?mode=date&date_after=' .$since.'&&project=wikipedia&lang=de&article=';
+    $url_prefix = 'http://'.$_SERVER["SERVER_NAME"].'/'.'diff2me.php?mode=date&date_after=' .$since.'&project=wikipedia&lang=de&article=';
 
     foreach($entries_removed AS $removed)
     {

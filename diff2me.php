@@ -2,13 +2,12 @@
 
 http://localhost:81/wikipedia/diff2me.php?mode=date&date_after=2014-03-14&&project=wikipedia&article=Hinterzarten&lang=de
 -->
-<?php
-
+<?php header('Content-Type: text/html; charset=utf-8'); 
 include("shared_inc/language.inc.php");
 include("shared_inc/wiki_functions.inc.php");
 $inc_dir = "wikiblame_inc";
 
-//get the language file and decide whether rtl oder ltr is used
+//get the language file
 $user_lang = read_language();
 get_language('en', $inc_dir); //not translated messages will be printed in English
 get_language($user_lang, $inc_dir);
