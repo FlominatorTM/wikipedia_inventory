@@ -62,7 +62,7 @@ if($mode=='date')
 
 	if($is_redir)
 	{
-		$redir_target = extract_link($art_text);
+		$redir_target = extract_link_target($art_text);
 		$article = $redir_target; 
 		$articleenc = name_in_url($article);
 	}
@@ -160,14 +160,6 @@ for($block_i = 1;$block_i<count($revision_html_blocks);$block_i++)
 	//echo $one_version.'<hr>';
 }
 
-function extract_link($haystack)
-{
-	$link_begin = strpos($haystack, "[[") + 2;
-	$link_end = strpos($haystack, "]]");
-	$link = substr($haystack, $link_begin, $link_end-$link_begin);
-	return str_replace('_', ' ', $link);
-}
-	
 function needle_in_cached_page($needle, $articletext)
 {
 	//echo "suche $needle in <small>$articletext</small>";
