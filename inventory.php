@@ -160,33 +160,6 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 	return $bulleted_list;
 }
 
-function retrieve_current_list_old($catenc, $template="", $other_cat_enc="", $template_not_present=false)
-{
-	global $number_of_current_entries;
-	$catpage ="https://toolserver.org/~daniel/WikiSense/CategoryIntersect.php?wikilang=de&wikifam=.wikipedia.org&basecat=$catenc&basedeep=3&go=Scannen&format=wiki&userlang=de";
-	if($template!="")
-	{
-		$catpage.="&mode=ts&templates=$template";
-		if($template_not_present)
-		{
-			$catpage.="&untagged=on";
-		}
-	}
-	else if($other_cat_enc!="")
-	{
-		$catpage.="&mode=cs&tagcat=$other_cat_enc";
-	}
-	else 
-	{
-	$catpage.="&mode=al";
-	}
-	
-	$page_content = file_get_contents($catpage);
-	$number_of_current_entries = count(explode("*", $page_content))-1;
-	echo "<!-- $catpage -->";
-	return $page_content;
-}
-
 function chop_content_local($art_text)
 {
 	//echo "chopping text";
