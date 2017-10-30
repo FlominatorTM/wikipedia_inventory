@@ -95,6 +95,7 @@ id="mw-diff-64569839" />
 <span class="comment">(Bot: Ergänze: <a href="http://vi.wikipedia.org/wiki/Hinterzarten" class="extiw" title="vi:Hinterzarten">vi:Hinterzarten</a>)</span> (<span class="mw-history-undo"><a href="/w/index.php?title=Hinterzarten&amp;action=edit&amp;undoafter=64556690&amp;undo=64569839" title="Hinterzarten">entfernen</a></span>) </span> <small><span class='fr-hist-autoreviewed plainlinks'>[<a href="http://de.wikipedia.org/w/index.php?title=Hinterzarten&amp;stableid=64569839" class="external text" rel="nofollow">automatisch gesichtet</a>]</span></small></li> <li><span class='flaggedrevs-color-1'>(<a href="/w/index.php?title=Hinterzarten&amp;diff=64569839&amp;oldid=64556690" title="Hinterzarten">Aktuell</a>) (<a href="/w/index.php?title=Hinterzarten&amp;diff=64556690&amp;oldid=63484457" title="Hinterzarten">Vorherige</a>) <input type="radio" value="64556690" checked="checked" name="oldid" id="mw-oldid-64556690" /><input type="radio" value="64556690" 
 </li>	*/
 
+$useThis = false;
 //iterate over the parts 
 for($block_i = 1;$block_i<count($revision_html_blocks);$block_i++)
 {
@@ -112,7 +113,6 @@ for($block_i = 1;$block_i<count($revision_html_blocks);$block_i++)
 	//echo "<h1>oneversion</h1>".$one_version;
 	//result: <a href="/w/index.php?title=Hinterzarten&amp;oldid=147847125" title="Hinterzarten" class="mw-changeslist-date">23:32, 8 November 2015</a>â€Ž <span class='history-user'><a href="/w/index.php?title=Benutzer:Buchbibliothek&amp;action=edit&amp;redlink=1" class="new mw-userlink" title="Benutzer:Buchbibliothek (page does not exist)">Buchbibliothek</a>
 
-	$useThis = false;
 	if($mode == 'user' && stristr($one_version, ":$userName"))
 	{
 		$useThis = true;
@@ -169,8 +169,22 @@ for($block_i = 1;$block_i<count($revision_html_blocks);$block_i++)
 	}	
 	
 	//echo $one_version.'<hr>';
-}
+}//end for
 
+if(!$useThis)
+{
+    echo "no revision of  ". '<a href="http://'.$server.'/w/index.php?title='.$articleenc.'">'.$article.'</a> found ';
+    
+    if($mode=='date') 
+    {
+        echo "that is older than $dateAfterString";
+    }
+    else if($mode=='user')
+    {
+        echo "that was created by user $userName";
+    }
+}    
+    
 function needle_in_cached_page($needle, $articletext)
 {
 	//echo "suche $needle in <small>$articletext</small>";
