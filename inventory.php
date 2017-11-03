@@ -19,18 +19,18 @@ $server = "$lang.$project.org";
 $number_of_current_entries = 0;
 
 $plainfuture_text = retrieve_current_list($catenc, $template, $other_cat_enc, $template_missing);	
+$plain_text = get_plain_text_from_article($articleenc);
+
 //echo "<hr>$plainfuture_text<hr>";
 echo '<form method="post" action="https://'.$server.'/w/index.php?action=submit&title='. $articleenc .'" target="_blank">'."\n";
 echo "<textarea  name=\"wpTextbox1\">";
-echo "\n== Einbindungen ==\n";
+echo  extract_and_update_introduction($plain_text);
 echo $plainfuture_text;
 echo "\n&nbsp;Anzahl: $number_of_current_entries";
 echo "</textarea><br>";
-echo '<input type="hidden" value="1" name="wpSection" />';
+//echo '<input type="hidden" value="1" name="wpSection" />';
 set_up_media_wiki_input_fields("Inventar-Seite mit inventory.php aktualisiert", "Inventar-Seite aktualisieren", $articleenc);
 echo "</form>\n";
-
-$plain_text = get_plain_text_from_article($articleenc);
 
 $entries_removed = compare_lists($plain_text, $plainfuture_text);
 $entries_added= compare_lists($plainfuture_text, $plain_text);
