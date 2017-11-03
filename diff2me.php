@@ -39,11 +39,15 @@ $dateAfterString = $_REQUEST['date_after'];
 if($dateAfterString != "")
 {
 	$mode='date';
-	$dateParts = explode('-', $dateAfterString);
-	$dateAfter = mktime(0, 0, 0, $dateParts[1], $dateParts[2], $dateParts[0]);
+	$parts = str_split($dateAfterString, 2);
+    $hour = $parts[4];
+    $minute = $parts[5];
+    $second = $parts[6];
+    $day = $parts[3];
+    $month = $parts[2];		
+    $year = $parts[0].$parts[1];
+	$dateAfter = mktime( $hour, $minute, $second, $month, $day,  $year );
 }
-
-
 
 $article = $_REQUEST['article']; 
 $articleenc = name_in_url($article);

@@ -49,10 +49,32 @@ echo '<input type="hidden" value="new" name="wpSection" />';
 set_up_media_wiki_input_fields("Änderungen", "Änderungen anschauen", urlencode('Wikipedia:Spielwiese'));
 echo "</form>\n";
 
+function extract_and_update_introduction($plain_text)
+{
+    $introduction = extract_section_zero($plain_text);
+    $LAST_UPDATE_PARAMETER = "LastUpdate";
+    $REV_TIMESTAMP = "{{subst:REVISIONTIMESTAMP}}";
+    $new_introduction = "";
+    if(stristr($introduction, "LastUpdate"))
+    {
+        $new_introduction = update_template_parameter($introduction, $LAST_UPDATE_PARAMETER, $REV_TIMESTAMP);    
+    }
+    else
+    {
+        $new_introduction = str_replace("{{Artikelinventar", "{{Artikelinventar\n|$LAST_UPDATE_PARAMETER=$REV_TIMESTAMP", $introduction);
+    }
+    return $new_introduction;
+}
+function extract_section_zero($plain_text)
+{
+    $endOfIntroduction = "==\n";
+    $indexOfEnd = strpos($plain_text, $endOfIntroduction) + strlen($endOfIntroduction);
+    return substr($plain_text, 0, $indexOfEnd);
+}
 function print_diff_list($entries_removed)
 {
     global $cat;
-    $since = $_REQUEST['since'];
+    $since = $_REQUEST['last'];
     $use_diff = ($since != "");
 
     $url_prefix = 'http://'.$_SERVER["SERVER_NAME"].'/'.'diff2me.php?mode=date&date_after=' .$since.'&project=wikipedia&lang=de&article=';
