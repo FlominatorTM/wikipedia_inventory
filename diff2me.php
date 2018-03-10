@@ -160,7 +160,7 @@ for($block_i = 1;$block_i<count($revision_html_blocks);$block_i++)
         
         if(!$is_redir)
 		{
-            echo '<meta http-equiv="refresh" content="blabla; url='.$redirect.'">';
+            echo '<meta http-equiv="refresh" content="0; url='.$redirect.'">';
         }
         echo     '</head>'.'<body>redirecting to <a href="'.$redirect.'">diff</a> ...';
         
