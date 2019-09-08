@@ -175,7 +175,6 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 	//echo count($rows) . "rows";
 	foreach($rows AS $row)
 	{
-		//echo "$row<br>";
 		$cols = explode("\t", $row);
 
 		if($cols[1]!="" && $cols[1] != 'title')
@@ -183,10 +182,24 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 			
 			$lemma = str_replace('_', ' ', $cols[1]);
 			
-			if(stristr($lemma, 'Kategorie:') || stristr($lemma, 'Datei:') || stristr($lemma, 'Vorlage:'))
+			switch($cols[3])
 			{
-				$lemma = ':'.$lemma;
+				case "Category":
+					$lemma = "Kategorie:$lemma";
+					break;
+				case "File";
+					$lemma = "Datei:$lemma";
+					break;
+				case "Template";
+					$lemma = "Vorlage:$lemma";
+					break;					
 			}
+			
+			/*if(stristr($lemma, 'Kategorie:') || stristr($lemma, 'Datei:') || stristr($lemma, 'Vorlage:'))*/
+			// if(stristr($lemma, 'Category:') || stristr($lemma, 'File:') || stristr($lemma, 'Template:'))
+			// {
+				// $lemma = ':'.$lemma;
+			// }
 			
 			$bulleted_list.="* [[".$lemma."]]\n";
 			$number_of_current_entries = $number_of_current_entries + 1;
