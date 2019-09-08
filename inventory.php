@@ -185,13 +185,13 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 			switch($cols[3])
 			{
 				case "Category":
-					$lemma = "Kategorie:$lemma";
+					$lemma = ":Kategorie:$lemma";
 					break;
 				case "File";
-					$lemma = "Datei:$lemma";
+					$lemma = ":Datei:$lemma";
 					break;
 				case "Template";
-					$lemma = "Vorlage:$lemma";
+					$lemma = ":Vorlage:$lemma";
 					break;					
 			}
 			
