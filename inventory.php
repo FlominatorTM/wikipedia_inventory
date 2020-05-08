@@ -139,7 +139,7 @@ function retrieve_current_list($catenc, $template, $other_cat_enc="", $template_
 	global $cat, $number_of_current_entries;
 
 	$all_namespaces ="ns%5B-2%5D=1&ns%5B0%5D=1&ns%5B2%5D=1&ns%5B4%5D=1&ns%5B6%5D=1&ns%5B8%5D=1&ns%5B10%5D=1&ns%5B12%5D=1&ns%5B14%5D=1&ns%5B100%5D=1&ns%5B828%5D=1&ns%5B-1%5D=1&ns%5B1%5D=1&ns%5B3%5D=1&ns%5B5%5D=1&ns%5B7%5D=1&ns%5B9%5D=1&ns%5B11%5D=1&ns%5B13%5D=1&ns%5B15%5D=1&ns%5B101%5D=1&ns%5B829%5D=1";
-	$url ="https://tools.wmflabs.org/catscan2/catscan2.php?language=de&categories=$catenc%0D%0A$other_cat_enc&doit=1&format=tsv&$all_namespaces&depth=15&sortby=title";
+	$url ="https://petscan.wmflabs.org/?language=de&categories=$catenc%0D%0A$other_cat_enc&doit=1&format=tsv&$all_namespaces&depth=15&sortby=title";
 	
    
    if($template!="")
