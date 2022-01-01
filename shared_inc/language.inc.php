@@ -50,8 +50,7 @@ function read_language()
 
 	if($user_lang=="")
 	{
-		$acceptLang = isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]) ? $_SERVER["HTTP_ACCEPT_LANGUAGE"] : "";
-		//http://www.php-resource.de/forum/showthread.php?threadid=22545
+		//https://www.php-resource.de/forum/php-developer-forum/22545-unterschiede-zwischen-versch-browsern-bei-http_accept_language.html
 		preg_match("/^([a-z]+)-?([^,;]*)/i", $_SERVER["HTTP_ACCEPT_LANGUAGE"], $matches);
 		
 		$user_lang = $matches[1];
@@ -59,6 +58,23 @@ function read_language()
 		if($user_lang=="")
 		{
 			$user_lang='en';
+		}
+		if($matches[1] == 'zh')
+		{
+			switch(strtolower($matches[2]))
+			{
+				case "tw":
+				case "hk":
+				{
+					$user_lang="zh-hant";
+					break;
+				}
+				default:
+				{
+					$user_lang="zh-hans";
+					break;
+				}
+			}
 		}
 	}
 	return $user_lang;
